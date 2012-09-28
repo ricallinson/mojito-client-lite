@@ -1,8 +1,10 @@
-# yahoo_mojito_addon_html
+# HTML Generator Addon
+
+This is an __addon__ for the [Yahoo! Mojito](https://github.com/yahoo/mojito/) framework.
 
 ## ac.html
 
-Used in place of the HTMLFrameMojit. Generates a __html__ wrapper when run in the server context.
+Used in place of the standard HTMLFrameMojit. Generates a __html__ wrapper when run in the server context.
 
 ### ac.html.done
 
