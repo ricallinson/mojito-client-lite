@@ -8,7 +8,8 @@
     },
     "yahoo": {
         "mojito": {
-            "version": ">= 0.4.x"
+            "version": ">= 0.4.x",
+            "type": "mojit"
         }
     }
 }

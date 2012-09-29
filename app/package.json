@@ -1,0 +1,13 @@
+{
+    "name": "yahoo_mojito_addon_html_test_app",
+    "description": "Testing and examples for the ac.html addon",
+    "version": "0.0.0",
+    "author": {
+        "name": "Richard S Allinson",
+        "email": "nobody@yahoo-inc.com"
+    },
+    "dependencies": {
+        "mojito": ">= 0.4.5",
+        "yahoo_mojito_addon_html": ">= 0.0.1"
+    }
+}
