@@ -13,7 +13,7 @@ YUI.add("example-ctrl", function (Y, NAME) {
     Y.namespace("mojito.controllers")[NAME] = {
 
         index: function (ac) {
-            // ac.assets.addBlob("<title>Addons Rule</title>");
+            ac.assets.addBlob("<title>Addons Rule</title>", "top");
             ac.html.done({msg: "Hello world"});
         }
     };
