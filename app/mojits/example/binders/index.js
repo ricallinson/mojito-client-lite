@@ -22,5 +22,7 @@ YUI.add('example_binder_index', function (Y, NAME) {
     };
 
 }, '0.0.1', {
-	requires: ['mojito-client']
+	requires: [
+		"mojito-client-lite"
+	]
 });

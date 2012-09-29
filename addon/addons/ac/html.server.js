@@ -109,11 +109,15 @@ YUI.add("yahoo-mojito-addon-html", function (Y, NAME) {
                 // Put the real adapter back
                 ac._adapter = tmp;
 
-                // Add all the assets we have been given to our local store
-                ac.assets.addAssets(meta.assets);
-
                 // Get all the deploy assets
-                ac.deploy.constructMojitoClientRuntime(ac.assets, meta.binders);
+                if (true) {
+                    ac.deploylite.addAssets(ac.assets, meta.binders);
+                } else {
+                    ac.deploy.constructMojitoClientRuntime(ac.assets, meta.binders);
+                }
+
+                // Add all the assets we have been given
+                ac.assets.addAssets(meta.assets);
 
                 // Set the HTTP header
                 ac.http.setHeader("content-type", "text/html");
@@ -128,7 +132,7 @@ YUI.add("yahoo-mojito-addon-html", function (Y, NAME) {
                     });
                 });
 
-                html = "<html><head>" + assets.top + "</head><body>\n" + data + "\n" + assets.bottom + "</body>";
+                html = "<html><head>" + (assets.top || "") + "</head><body>\n" + data + "\n" + (assets.bottom || "") + "</body>";
 
                 // console.log(JSON.stringify(assets, null, 4));
 
@@ -146,6 +150,7 @@ YUI.add("yahoo-mojito-addon-html", function (Y, NAME) {
     requires: [
         "mojito",
         "mojito-deploy-addon",
+        "mojito-deploylite-addon",
         "mojito-assets-addon",
         "mojito-http-addon"
     ]
