@@ -37,6 +37,13 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
                 callback(self);
             }
         });
+
+        // Checks to see if the caller wants us. If true return self.
+        Y.on("mojito:binder:comehere", function (viewId, callback) {
+            if (viewId === self.viewId) {
+                callback(self);
+            }
+        });
     }
 
     MojitProxy.prototype = {
@@ -104,7 +111,7 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
 
             // Destroy all children first unless we are told not to
             if (destroyChildren !== false) {
-                this.destroyChildren(retainNode);
+                this.destroyChildren(true);
             }
 
             // Remove the node unless we are told not to
@@ -117,14 +124,17 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
         },
 
         destroyChild: function (viewId, retainNode) {
-            // ...
+            Y.fire("mojito:binder:comehere", viewId, function (child) {
+                // Each child only has to kill it binder as we will remove the node here
+                child.destroySelf(retainNode);
+            });
         },
 
         destroyChildren: function (retainNodes) {
             // Find all children and call destroySelf() on each one
             Y.fire("mojito:binder:perterity", this.viewId, function (child) {
                 // Each child only has to kill it binder as we will remove the node here
-                child.destroySelf(true, false);
+                child.destroySelf(retainNodes, false);
             });
         },
 
