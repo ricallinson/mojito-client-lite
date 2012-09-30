@@ -212,6 +212,7 @@ YUI.add("mojito-client-lite", function(Y, NAME) {
 
                 if (!existsOnClient) {
                     // change the command.instance to the proxy-mojit
+                    throw new Error("TODO");
                 }
 
                 // Set the context
@@ -233,7 +234,7 @@ YUI.add("mojito-client-lite", function(Y, NAME) {
         "mojito-dispatcher",
         "mojito-output-handler",
         "querystring",
-        "io", // Added here to make it appear in "mojito-client-store" (HACK)
+        "io-base", // Added here to make it appear in "mojito-client-store" (HACK)
         "json" // Added here to make it appear in "mojito-client-store" (HACK)
     ]
 });

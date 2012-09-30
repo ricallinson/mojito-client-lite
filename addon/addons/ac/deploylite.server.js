@@ -84,7 +84,6 @@ YUI.add("mojito-deploylite-addon", function(Y, NAME) {
                 assets.addJs(appConfigClient.yui.url, "top");
             } else {
                 assets.addJs("http://yui.yahooapis.com/" + YUI.version + "/build/yui/yui.js", "top");
-                // assets.addJs("http://yui.yahooapis.com/3.6.0/build/yui/yui.js", "top");
             }
 
             // Add required config data
@@ -109,10 +108,10 @@ YUI.add("mojito-deploylite-addon", function(Y, NAME) {
                     assets.addJs(binder.needs["mojito-client-store"], "bottom");
                     assets.addJs(binder.needs["mojito-resource-store-adapter"], "bottom");
                     assets.addJs(binder.needs["mojito-output-handler"], "bottom");
-                    
                     assets.addJs(binder.needs["mojito-perf"], "bottom");
                     assets.addJs(binder.needs["mojito-util"], "bottom");
-                    assets.addJs(binder.needs["mojito-controller-context"], "bottom"); // will be removed
+                    assets.addJs(binder.needs["mojito-controller-context"], "bottom"); // will be removed in 0.5
+                    // assets.addJs(binder.needs["mojito-action-context"], "bottom"); // will be added in 0.5
                     clientLiteAdded = true;
                 }
 
