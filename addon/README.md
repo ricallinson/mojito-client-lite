@@ -18,7 +18,7 @@ Used in place of the HTMLFrameMojit. Generates a __html__ wrapper when run in th
 
 ## mojitoClientLite
 
-Used in place of the default Mojito Client Runtime. To activate it add __mojitoClientLite: true__ to __application.json__.
+Used in place of the default Mojito Client Runtime. To activate it add __mojitoClientLite: true__ to __application.json__ when you are using __ac.html__ for generating your HTML.
 
     [
         {
@@ -59,3 +59,23 @@ or;
             }
         });
     }, '0.0.1', {requires: ["mojito-client-lite", "view"]});
+
+## binder
+
+When using __mojitoClientLite: true__ it is important to note that the __binder__ api has changed to support the [Y.View](http://yuilibrary.com/yui/docs/view/) method of working with the DOM.
+
+### initializer
+
+### bind
+
+### mp.invoke
+
+### mp.getViewId
+
+### mp.destroySelf
+
+### mp.destroyChild
+
+### mp.destroyChildren
+
+### mp.getFromUrl
