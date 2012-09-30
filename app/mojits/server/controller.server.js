@@ -18,8 +18,7 @@ YUI.add("server-ctrl", function (Y, NAME) {
         },
 
         remote: function (ac) {
-            console.log("##################");
-            ac.done("String from server.");
+            ac.done("<p>String from server.</p>");
         }
     };
 

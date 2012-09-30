@@ -281,6 +281,10 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
                     throw new Error(err);
                 }
 
+                // Clean of the crap that we collected from expandInstance
+                delete command.instance.instanceId;
+                delete command.instance.guid;
+
                 // if there is a controller in the client type details, that
                 // means the controller exists here
                 var existsOnClient = Boolean(instance['controller-module']);
@@ -288,6 +292,9 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
                 if (!existsOnClient) {
 
                     remoteCommand = command;
+
+                    // Set the context on the remoteCommand
+                    remoteCommand.context = self.context;
 
                     command = {
                         instance: {
@@ -303,7 +310,7 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
                     // throw new Error("TODO");
                 }
                 // console.log(JSON.stringify(command, null, 4));
-                // Set the context
+                // Set the context on the current
                 command.context = self.context;
 
                 // Sending "this|self" to the "OutputHandler" is not a good idea
