@@ -1,17 +1,15 @@
-# HTML Generator Addon
+# Addon to replace HTMLFrameMojit
 
-This is an __addon__ for the [Yahoo! Mojito](https://github.com/yahoo/mojito/) framework.
+This is an __addon__ for the [Yahoo! Mojito](https://github.com/yahoo/mojito/) framework. [See the documentation for information](https://github.com/ricallinson/yahoo_mojito_addon_html/tree/master/addon).
 
-## ac.html
+## Example App
 
-Used in place of the standard HTMLFrameMojit. Generates a __html__ wrapper when run in the server context.
+For a running example;
 
-### ac.html.done
+	git clone git@github.com:ricallinson/yahoo_mojito_addon_html.git
+	cd ./yahoo_mojito_addon_html/app
+	npm i mojito -g
+	npm i .
+	mojito start
 
-    YUI.add("example-ctrl", function(Y, NAME) {
-        Y.namespace("mojito.controllers")[NAME] = {
-            index: function(ac) {
-                ac.html.done({msg: "Hello world"});
-            }
-        };
-    }, "0.1.0", {requires: ["mojito", "yahoo-mojito-addon-html"]});
+Open [http://localhost:8666/@example/index](http://localhost:8666/@example/index) in a browser.
