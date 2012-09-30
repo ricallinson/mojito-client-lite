@@ -1,6 +1,6 @@
-# Addon to replace HTMLFrameMojit
+# Mojit to use inplace of HTMLFrameMojit
 
-This is an __addon__ for the [Yahoo! Mojito](https://github.com/yahoo/mojito/) framework. [See the documentation for information](https://github.com/ricallinson/mojito-client-lite/tree/master/addon).
+This is an __mojit__ for the [Yahoo! Mojito](https://github.com/yahoo/mojito/) framework. [See the documentation for information](https://github.com/ricallinson/mojito-client-lite/tree/master/addon).
 
 ## Example App
 
