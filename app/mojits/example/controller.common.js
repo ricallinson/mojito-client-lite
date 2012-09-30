@@ -18,8 +18,8 @@ YUI.add("example-ctrl", function (Y, NAME) {
         },
 
         destroy: function (ac) {
-            ac.assets.addBlob("<title>Addons Rule</title>", "top");
-            ac.html.done({msg: "destroy test"});
+            ac.assets.addBlob("<title>Destroy Stuff</title>", "top");
+            ac.html.done({msg: "Destroy world"});
         }
     };
 

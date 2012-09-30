@@ -33,7 +33,8 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
 
         // Checks to see if the caller is an ancestor. If it is return self.
         Y.on("mojito:binder:perterity", function (parentId, callback) {
-            if (Y.one("#" + self.viewId).ancestor("#" + parentId)) {
+            var node = Y.one("#" + self.viewId);
+            if (node && node.ancestor("#" + parentId)) {
                 callback(self);
             }
         });
@@ -102,6 +103,8 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
 
         destroySelf: function (retainNode, destroyChildren) {
 
+            var node;
+
             // Call destroy on the binder
             if (this.binder && typeof this.binder.destroy === "function") {
                 this.binder.destroy();
@@ -116,7 +119,10 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
 
             // Remove the node unless we are told not to
             if (!retainNode) {
-                Y.one("#" + this.viewId).remove();
+                node = Y.one("#" + this.viewId);
+                if (node) {
+                    node.remove();
+                }
             }
 
             // Finally we fire an event to delete this
