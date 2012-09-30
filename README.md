@@ -1,6 +1,8 @@
 # Mojit to use in place of HTMLFrameMojit
 
-__IN DEVELOPMENT__: This is a __bundle__ of __mojits__ for the [Yahoo! Mojito](https://github.com/yahoo/mojito/) framework. It provides a smaller client side footprint and integration with [Y.View](http://yuilibrary.com/yui/docs/view/). [See the documentation for information](https://github.com/ricallinson/mojito-client-lite/tree/master/bundle).
+__IN DEVELOPMENT__: This is a __bundle__ of __mojits__ for the [Yahoo! Mojito](https://github.com/yahoo/mojito/) framework. It provides a smaller client side footprint and integration with [Y.View](http://yuilibrary.com/yui/docs/view/).
+
+[See the full documentation for more information](https://github.com/ricallinson/mojito-client-lite/tree/master/bundle).
 
 ## Developer Example App
 
