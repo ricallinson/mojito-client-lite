@@ -27,7 +27,18 @@ Used in place of the default Mojito Client Runtime. To activate it add __mojitoC
         }
     ]
 
-When __mojitoClientLite: true__ is set the API of a __binder__ changes to support the use of [Y.View](http://yuilibrary.com/yui/docs/view/). This takes the form of using the method __initializer__ in place of __init__. The value returned by the binder module can be either an __object__ or a __function__. If the value is a function the __new__ operator will be called on it. The __binder__ now comes with the _Mojit Proxy_ attached to the attribute __mp__ by default.
+## binder
+
+When using __mojitoClientLite: true__ it is important to note that the __binder__ api has changed to support the [Y.View](http://yuilibrary.com/yui/docs/view/) method of working with the DOM. They are;
+
+* Replacing the __init__ method with an __initializer__ method.
+* The value returned by the YUI Module can be either an __object__ or a __function__.
+    * If the value is a function the __new__ operator will be called on it.
+    * If the value is an object it will be passed to the __Object.create__ function.
+* The __binder__ now comes with the _Mojit Proxy_ attached to the attribute __mp__ by default.
+* If the binder is a [Y.View](http://yuilibrary.com/yui/docs/view/) instance the DOM node is automatically set.
+
+Object based binder;
 
     YUI.add('example_binder_index', function (Y, NAME) {
         Y.namespace('mojito.binders')[NAME] = {
@@ -40,7 +51,7 @@ When __mojitoClientLite: true__ is set the API of a __binder__ changes to suppor
         };
     }, '0.0.1', {requires: ["mojito-client-lite"]});
 
-or; 
+Y.View based binder; 
 
     YUI.add('example_binder_index', function (Y, NAME) {
         Y.namespace('mojito.binders')[NAME] = Y.Base.create(NAME, Y.View, [], {
@@ -60,13 +71,13 @@ or;
         });
     }, '0.0.1', {requires: ["mojito-client-lite", "view"]});
 
-## binder
-
-When using __mojitoClientLite: true__ it is important to note that the __binder__ api has changed to support the [Y.View](http://yuilibrary.com/yui/docs/view/) method of working with the DOM.
-
 ### initializer
 
+Optional: This function is called after the creation of the binder but before [bind](#bind).
+
 ### bind
+
+Optional: This function is called after [initializer](#initializer). It is passed a single argument which is a YUI Node object containing the Mojits DOM element that __id="{{mojit_view_id}}"__ was added to.
 
 ### mp.invoke
 
