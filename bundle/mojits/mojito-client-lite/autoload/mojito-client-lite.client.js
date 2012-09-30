@@ -287,9 +287,7 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
 
                 // if there is a controller in the client type details, that
                 // means the controller exists here
-                var existsOnClient = Boolean(instance['controller-module']);
-
-                if (!existsOnClient) {
+                if (!Boolean(instance['controller-module'])) {
 
                     remoteCommand = command;
 

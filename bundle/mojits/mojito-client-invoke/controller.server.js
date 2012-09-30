@@ -4,6 +4,8 @@
  * See the accompanying LICENSE file for terms.
  */
 
+/*jslint nomen: true*/
+
 /*global YUI*/
 
 "use strict";
