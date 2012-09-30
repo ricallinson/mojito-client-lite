@@ -1,4 +1,4 @@
 echo "Running JSLint"
 
-find ./addon -name "*.js" -print0 | xargs -0 jslint
+find ./mojit -name "*.js" -print0 | xargs -0 jslint
 find ./app/mojits -name "*.js" -print0 | xargs -0 jslint

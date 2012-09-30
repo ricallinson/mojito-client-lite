@@ -1,10 +1,12 @@
-# HTML Generator Addon
+# Mojito Client Lite
 
-This is an __addon__ for the [Yahoo! Mojito](https://github.com/yahoo/mojito/) framework.
+This is a __mojit__ for the [Yahoo! Mojito](https://github.com/yahoo/mojito/) framework.
+
+    npm i mojito-client-lite
 
 ## ac.html
 
-Used in place of the HTMLFrameMojit. Generates a __html__ wrapper when run in the server context.
+An __addon__ to use in place of the HTMLFrameMojit. Generates a __html__ wrapper when run in the server context.
 
 ### ac.html.done
 

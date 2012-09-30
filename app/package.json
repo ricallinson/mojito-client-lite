@@ -1,5 +1,5 @@
 {
-    "name": "yahoo_mojito_addon_html_test_app",
+    "name": "yahoo_mojito_client_lite_mojit_test_app",
     "description": "Testing and examples for the ac.html addon",
     "version": "0.0.0",
     "author": {
@@ -8,6 +8,6 @@
     },
     "dependencies": {
         "mojito": ">= 0.4.5",
-        "yahoo_mojito_addon_html": ">= 0.0.1"
+        "mojito_client_lite": ">= 0.0.1"
     }
 }

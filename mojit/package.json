@@ -1,6 +1,6 @@
 {
-    "name": "yahoo_mojito_addon_html",
-    "description": "A Mojito Addon for generating HTML and handling link clicks within the HTML application. This is a replacement for the HTMLFrameMojit.",
+    "name": "mojito-client-lite",
+    "description": "This is a replacement for the HTMLFrameMojit. It's a Mojito Mojit with a smaller client side footprint.",
     "version": "0.0.1",
     "author": {
         "name": "Richard S Allinson",
