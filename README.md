@@ -1,6 +1,6 @@
 # Mojit to use in place of HTMLFrameMojit
 
-This is an __mojit__ for the [Yahoo! Mojito](https://github.com/yahoo/mojito/) framework. [See the documentation for information](https://github.com/ricallinson/mojito-client-lite/tree/master/mojit).
+This is a __mojit__ for the [Yahoo! Mojito](https://github.com/yahoo/mojito/) framework. [See the documentation for information](https://github.com/ricallinson/mojito-client-lite/tree/master/mojit).
 
 ## Developer Example App
 
