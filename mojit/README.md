@@ -2,7 +2,7 @@
 
 This is a __mojit__ for the [Yahoo! Mojito](https://github.com/yahoo/mojito/) framework.
 
-    npm i mojito-client-lite
+    npm link <this-dir>
 
 ## ac.html
 
