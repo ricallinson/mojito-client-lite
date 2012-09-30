@@ -85,7 +85,7 @@ YUI.add("mojito-deploylite-addon", function (Y, NAME) {
             if (appConfigClient.yui.url) {
                 assets.addJs(appConfigClient.yui.url, "top");
             } else {
-                assets.addJs("http://yui.yahooapis.com/" + YUI.version + "/build/yui/yui.js", "top");
+                assets.addJs("http://yui.yahooapis.com/" + YUI.version + "/build/yui/yui-debug.js", "top");
             }
 
             // Add required config data

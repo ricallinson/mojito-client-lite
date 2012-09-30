@@ -1,6 +1,6 @@
 # Mojito Client Lite
 
-__IN DEVELOPMENT__: This is a __mojit__ for the [Yahoo! Mojito](https://github.com/yahoo/mojito/) framework.
+__IN DEVELOPMENT__: This is a __bundle__ of __mojits__ for the [Yahoo! Mojito](https://github.com/yahoo/mojito/) framework.
 
     npm link <this-dir>
 

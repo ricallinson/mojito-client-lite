@@ -271,6 +271,8 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
 
             this.resourceStore.expandInstance(command.instance, command.context, function (err, instance) {
 
+                var remoteCommand;
+
                 if (err) {
                     if (typeof cb === 'function') {
                         cb(new Error(err));
@@ -284,10 +286,23 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
                 var existsOnClient = Boolean(instance['controller-module']);
 
                 if (!existsOnClient) {
-                    // change the command.instance to the proxy-mojit
-                    throw new Error("TODO");
-                }
 
+                    remoteCommand = command;
+
+                    command = {
+                        instance: {
+                            type: "mojito-client-invoke"
+                        },
+                        action: "execute",
+                        params: {
+                            body: remoteCommand
+                        }
+                    };
+
+                    // change the command.instance to the proxy-mojit
+                    // throw new Error("TODO");
+                }
+// console.log(JSON.stringify(command, null, 4));
                 // Set the context
                 command.context = self.context;
 

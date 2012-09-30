@@ -8,6 +8,6 @@
     },
     "dependencies": {
         "mojito": ">= 0.4.5",
-        "mojito_client_lite": ">= 0.0.1"
+        "mojito-client-lite": ">= 0.0.1"
     }
 }

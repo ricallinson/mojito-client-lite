@@ -9,7 +9,7 @@
     "yahoo": {
         "mojito": {
             "version": ">= 0.4.x",
-            "type": "mojit"
+            "type": "bundle"
         }
     }
 }
