@@ -13,7 +13,7 @@ YUI.add("server-ctrl", function (Y, NAME) {
     Y.namespace("mojito.controllers")[NAME] = {
 
         index: function (ac) {
-        	ac.assets.addBlob("<title>Server Stuff</title>", "top");
+            ac.assets.addBlob("<title>Server Stuff</title>", "top");
             ac.html.done({msg: "Server world"});
         },
 

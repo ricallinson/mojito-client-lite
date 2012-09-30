@@ -44,7 +44,7 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
         });
 
         // Checks to see if the caller wants us. If true return self.
-        Y.on("mojito:binder:comehere", function (viewId, callback) {
+        Y.on("mojito:binder:summon", function (viewId, callback) {
             if (viewId === self.viewId) {
                 callback(self);
             }
@@ -118,6 +118,7 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
 
             // Destroy all children first unless we are told not to
             if (destroyChildren !== false) {
+                // Each child only has to kill its binder as we will remove the node here
                 this.destroyChildren(true);
             }
 
@@ -133,16 +134,14 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
         },
 
         destroyChild: function (viewId, retainNode) {
-            Y.fire("mojito:binder:comehere", viewId, function (child) {
-                // Each child only has to kill it binder as we will remove the node here
+            Y.fire("mojito:binder:summon", viewId, function (child) {
                 child.destroySelf(retainNode);
             });
         },
 
+        // Find all children and call destroySelf() on each one
         destroyChildren: function (retainNodes) {
-            // Find all children and call destroySelf() on each one
             Y.fire("mojito:binder:perterity", this.viewId, function (child) {
-                // Each child only has to kill it binder as we will remove the node here
                 child.destroySelf(retainNodes, false);
             });
         },
@@ -320,7 +319,7 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
     Y.namespace('mojito').Client = MojitoClient;
 
 }, "0.0.1", {
-	requires: [
+    requires: [
         "node",
         "mojito-client-store",
         "mojito-resource-store-adapter",

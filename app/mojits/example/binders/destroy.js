@@ -24,8 +24,8 @@ YUI.add('example_binder_destroy', function (Y, NAME) {
     });
 
 }, '0.0.1', {
-	requires: [
-		"mojito-client-lite",
+    requires: [
+        "mojito-client-lite",
         "view"
-	]
+    ]
 });
