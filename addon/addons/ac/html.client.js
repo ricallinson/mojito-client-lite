@@ -25,8 +25,4 @@ YUI.add("yahoo-mojito-addon-html", function (Y, NAME) {
 
     Y.namespace("mojito.addons.ac").html = Addon;
 
-}, "0.1.0", {
-    requires: [
-        "mojito"
-    ]
 });

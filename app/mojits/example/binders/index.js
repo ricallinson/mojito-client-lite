@@ -27,7 +27,9 @@ YUI.add('example_binder_index', function (Y, NAME) {
         },
 
         logit: function () {
-            Y.log("A click happened");
+            this.mp.invoke("index", function (err, data) {
+                Y.log("A click happened");
+            });
         }
     });
 

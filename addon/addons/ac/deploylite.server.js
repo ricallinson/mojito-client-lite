@@ -64,15 +64,7 @@ YUI.add("mojito-deploylite-addon", function(Y, NAME) {
                 Setup YUI Config
             */
             yuiConfig = {};
-            yuiConfig.lang = context.lang; // same as contextClient.lang
-            // yuiConfig.core = yuiConfig.core || [];
-            // yuiConfig.core = yuiConfig.core.concat([
-            //     "get",
-            //     "features",
-            //     "intl-base",
-            //     "yui-log",
-            //     "yui-later"
-            // ]);
+            yuiConfig.lang = context.lang;
 
             // Remove the dependencyCalculations option as we will let YUI work naturally
             delete yuiConfig.dependencyCalculations;
@@ -91,22 +83,45 @@ YUI.add("mojito-deploylite-addon", function(Y, NAME) {
             if (appConfigClient.yui.url) {
                 assets.addJs(appConfigClient.yui.url, "top");
             } else {
-                assets.addJs("http://yui.yahooapis.com/" + YUI.version + "/build/yui/yui-min.js", "top");
+                assets.addJs("http://yui.yahooapis.com/" + YUI.version + "/build/yui/yui.js", "top");
+                // assets.addJs("http://yui.yahooapis.com/3.6.0/build/yui/yui.js", "top");
             }
 
-            // add binders" dependencies
-            for (viewId in binderMap) {
-                if (binderMap.hasOwnProperty(viewId)) {
-                    binder = binderMap[viewId];
-                    // Add "mojito-client-lite", a lite version of "mojito-client"
-                    if (!clientLiteAdded) {
-                        assets.addJs(binder.needs["mojito-client-lite"], "bottom");
-                        clientLiteAdded = true;
-                    }
-                    assets.addJs(binder.needs[binder.name], "bottom");
-                    pageConfig.binders[viewId] = binder.name;
+            // Add required config data
+            pageConfig.context = context;
+            pageConfig.appConfig = {};
+
+            // Y.Object.each(binderMap, function (binder, viewId) {
+            //     binder = binderMap[viewId];
+            //     Y.Object.each(binder.needs, function (url) {
+            //         assets.addJs(url, "bottom");
+            //     });
+            //     pageConfig.binders[viewId] = binder.name;
+            // });
+
+            // add binders' dependencies
+            Y.Object.each(binderMap, function (binder, viewId) {
+                binder = binderMap[viewId];
+                // Add "mojito-client-lite", a lite version of "mojito-client"
+                if (!clientLiteAdded) {
+                    assets.addJs(binder.needs["mojito-client-lite"], "bottom");
+                    assets.addJs(binder.needs["mojito-dispatcher"], "bottom");
+                    assets.addJs(binder.needs["mojito-client-store"], "bottom");
+                    assets.addJs(binder.needs["mojito-resource-store-adapter"], "bottom");
+                    assets.addJs(binder.needs["mojito-output-handler"], "bottom");
+                    
+                    assets.addJs(binder.needs["mojito-perf"], "bottom");
+                    assets.addJs(binder.needs["mojito-util"], "bottom");
+                    assets.addJs(binder.needs["mojito-controller-context"], "bottom"); // will be removed
+                    clientLiteAdded = true;
                 }
-            }
+
+                assets.addJs(binder.needs[binder.name], "bottom");
+                pageConfig.binders[viewId] = {
+                    type: binder.type,
+                    name: binder.name
+                };
+            });
 
             // Unicode escape the various strings in the config data to help
             // fight against possible script injection attacks.
