@@ -302,7 +302,7 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
                     // change the command.instance to the proxy-mojit
                     // throw new Error("TODO");
                 }
-// console.log(JSON.stringify(command, null, 4));
+                // console.log(JSON.stringify(command, null, 4));
                 // Set the context
                 command.context = self.context;
 

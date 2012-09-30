@@ -23,7 +23,7 @@ YUI.add("mojito-client-invoke-ctrl", function (Y, NAME) {
         	// console.log(JSON.stringify(command, null, 4));
 
         	cfg = {
-			    method: 'GET',
+			    method: 'POST',
 			    data: JSON.stringify(ac.params.body()),
 			    headers: {
 			        'Content-Type': 'application/json',

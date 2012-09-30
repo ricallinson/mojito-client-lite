@@ -92,14 +92,6 @@ YUI.add("mojito-deploylite-addon", function (Y, NAME) {
             pageConfig.context = context;
             pageConfig.appConfig = {};
 
-            // Y.Object.each(binderMap, function (binder, viewId) {
-            //     binder = binderMap[viewId];
-            //     Y.Object.each(binder.needs, function (url) {
-            //         assets.addJs(url, "bottom");
-            //     });
-            //     pageConfig.binders[viewId] = binder.name;
-            // });
-
             // add binders' dependencies
             Y.Object.each(binderMap, function (binder, viewId) {
                 binder = binderMap[viewId];

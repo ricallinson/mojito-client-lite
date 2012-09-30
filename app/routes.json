@@ -1,0 +1,11 @@
+[
+	{
+		"settings": ["master"],
+
+		"_default_path": {
+            "verbs": [ "GET", "POST" ],
+            "path": "/:module/:action",
+            "call": "*.*"
+        }
+	}
+]
