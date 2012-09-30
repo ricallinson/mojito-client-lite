@@ -264,8 +264,6 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
                     if (typeof binderInstance.bind === "function") {
                         binderInstance.bind(node);
                     }
-
-                    // console.log(binder, viewId);
                 });
             });
         },
