@@ -10,19 +10,38 @@
     State is the enemy of the good.
 */
 
-YUI.add("mojito-client-lite", function(Y, NAME) {
+YUI.add("mojito-client-lite", function (Y, NAME) {
 
     function MojitProxy(config) {
+
+        var self = this,
+            gcTimer;
+
         this.type = config.type;
         this.viewId = config.viewId;
         this.instanceId = config.instanceId;
         this.binder = config.binder;
         this.dispatch = config.dispatch;
+
+        // This is our binder GC, it fires every 5 seconds
+        gcTimer = setInterval(function () {
+            if (!Y.one("#" + self.viewId)) {
+                clearInterval(gcTimer);
+                self.destroySelf();
+            }
+        }, 5000);
+
+        // Checks to see if the caller is an ancestor. If it is return self.
+        Y.on("mojito:binder:perterity", function (parentId, callback) {
+            if (Y.one("#" + self.viewId).ancestor("#" + parentId)) {
+                callback(self);
+            }
+        });
     }
 
     MojitProxy.prototype = {
 
-        invoke: function(action, options, cb) {
+        invoke: function (action, options, cb) {
 
             var callback, command;
 
@@ -38,8 +57,7 @@ YUI.add("mojito-client-lite", function(Y, NAME) {
 
             // If we don't have a callback set an empty one
             if ('function' !== typeof callback) {
-                // TODO: this can be a constant function...not created on each
-                // invoke call.
+                // TODO: this can be a constant function...not created on each invoke call.
                 callback = function() {};
             }
 
@@ -64,20 +82,50 @@ YUI.add("mojito-client-lite", function(Y, NAME) {
             this.dispatch(this.viewId, command, callback);
         },
 
-        getViewId: function() {
+        getViewId: function () {
             return this.viewId;
         },
 
-        destroySelf: function(retainNode) {
+        /**
+         * Allows a binder to destroy itself and be removed from Mojito client runtime entirely.
+         * 
+         * @method destroySelf
+         * @param {Boolean} retainNode if true, the binder's node will remain in the dom.
+         */
+
+        destroySelf: function (retainNode, destroyChildren) {
+
+            // Call destroy on the binder
+            if (this.binder && typeof this.binder.destroy === "function") {
+                this.binder.destroy();
+                Y.log("Destroy was called on [" + this.viewId + "]");
+                delete this.binder;
+            }
+
+            // Destroy all children first unless we are told not to
+            if (destroyChildren !== false) {
+                this.destroyChildren(retainNode);
+            }
+
+            // Remove the node unless we are told not to
+            if (!retainNode) {
+                Y.one("#" + this.viewId).remove();
+            }
+
+            // Finally we fire an event to delete this
+            Y.fire("mojito:client:delete", this);
+        },
+
+        destroyChild: function (viewId, retainNode) {
             // ...
         },
 
-        destroyChild: function(viewId, retainNode) {
-            // ...
-        },
-
-        destroyChildren: function(retainNodes) {
-            // ...
+        destroyChildren: function (retainNodes) {
+            // Find all children and call destroySelf() on each one
+            Y.fire("mojito:binder:perterity", this.viewId, function (child) {
+                // Each child only has to kill it binder as we will remove the node here
+                child.destroySelf(true, false);
+            });
         },
 
         /**
@@ -87,7 +135,7 @@ YUI.add("mojito-client-lite", function(Y, NAME) {
          * @return {String|Object} param value, or all params if no key
          *     specified.
          */
-        getFromUrl: function(key) {
+        getFromUrl: function (key) {
 
             if (!this.query) {
                 if (window.location.href.indexOf("?") > 0) {
@@ -122,19 +170,20 @@ YUI.add("mojito-client-lite", function(Y, NAME) {
         this.dispatcher = Y.mojito.Dispatcher.init(this.resourceStore, null, Y);//, YUI._mojito.loader);
 
         // start up any binders we have in the config
-        this.startBinders(config.binders);
+        this.attachBinders(config.binders);
+
+        // Listen for delete requests
+        Y.on("mojito:client:delete", function (obj) {
+            Y.log("Delete was called on object [" + obj + "]", "info");
+            delete obj;
+        });
 
         Y.log("Mojito client lite started.");
     }
 
     MojitoClient.prototype = {
 
-        attachBinders:  function (binderMap, parentId, viewId) {
-            console.log("TODO:", binderMap, parentId, viewId);
-            this.startBinders(binderMap);
-        },
-
-        startBinders: function (binderMap) {
+        attachBinders: function (binderMap, parentId) {
 
             var self = this;
 
@@ -146,6 +195,10 @@ YUI.add("mojito-client-lite", function(Y, NAME) {
 
                 var node = Y.one("#" + viewId),
                     binderName = binderInfo.name;
+
+                // TODO:
+                // Check to see if any of the given viewIds already have binders
+                // If any do, remove them and log a warning as this should never happen
 
                 if (!node) {
                     Y.log("Element with id [" + viewId + "] was not found for binder [" + binderName + "].", "info");
@@ -192,7 +245,7 @@ YUI.add("mojito-client-lite", function(Y, NAME) {
             });
         },
 
-        dispatchAdapter: function(viewId, command, cb) {
+        dispatchAdapter: function (viewId, command, cb) {
 
             var self = this;
 

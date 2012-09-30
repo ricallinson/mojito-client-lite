@@ -15,6 +15,11 @@ YUI.add("example-ctrl", function (Y, NAME) {
         index: function (ac) {
             ac.assets.addBlob("<title>Addons Rule</title>", "top");
             ac.html.done({msg: "Hello world"});
+        },
+
+        destroy: function (ac) {
+            ac.assets.addBlob("<title>Addons Rule</title>", "top");
+            ac.html.done({msg: "destroy test"});
         }
     };
 

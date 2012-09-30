@@ -8,7 +8,7 @@
 
 "use strict";
 
-YUI.add('example_binder_index', function (Y, NAME) {
+YUI.add('example_binder_destroy', function (Y, NAME) {
 
     Y.namespace('mojito.binders')[NAME] = Y.Base.create(NAME, Y.View, [], {
 
@@ -27,9 +27,7 @@ YUI.add('example_binder_index', function (Y, NAME) {
         },
 
         logit: function (e) {
-            this.mp.invoke("index", function (err, data) {
-                e.currentTarget.append(data);
-            });
+            e.currentTarget.remove();
         }
     });
 
