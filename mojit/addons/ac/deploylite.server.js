@@ -6,10 +6,12 @@
 
 /*global YUI*/
 
+"use strict";
+
 /**
  * @module ActionContextAddon
  */
-YUI.add("mojito-deploylite-addon", function(Y, NAME) {
+YUI.add("mojito-deploylite-addon", function (Y, NAME) {
 
     function Addon(command, adapter, ac) {
         this.ac = ac;
@@ -25,7 +27,7 @@ YUI.add("mojito-deploylite-addon", function(Y, NAME) {
          * @private
          * @param {ResourceStore} rs The resource store instance.
          */
-        setStore: function(rs) {
+        setStore: function (rs) {
             this.rs = rs;
             if (rs) {
                 Y.log("Initialized and activated with Resource Store", "info", NAME);
@@ -40,7 +42,7 @@ YUI.add("mojito-deploylite-addon", function(Y, NAME) {
          * @param {object} binderMap information about the binders that will be
          *     deployed to the client.
          */
-        addAssets: function(assets, binderMap) {
+        addAssets: function (assets, binderMap) {
 
             var store = this.rs,
                 viewId,

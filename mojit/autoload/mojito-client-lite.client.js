@@ -4,7 +4,11 @@
  * See the accompanying LICENSE file for terms.
  */
 
-/*global YUI*/
+/*jslint nomen: true*/
+
+/*global YUI: true, window: true*/
+
+"use strict";
 
 /*
     State is the enemy of the good.
@@ -66,7 +70,7 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
             // If we don't have a callback set an empty one
             if ('function' !== typeof callback) {
                 // TODO: this can be a constant function...not created on each invoke call.
-                callback = function() {};
+                callback = function () {};
             }
 
             // Make sure we have a "params" key in our "options" object
@@ -108,8 +112,8 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
             // Call destroy on the binder
             if (this.binder && typeof this.binder.destroy === "function") {
                 this.binder.destroy();
-                Y.log("Destroy was called on [" + this.viewId + "]");
                 delete this.binder;
+                Y.log("Destroy was called on [" + this.viewId + "]");
             }
 
             // Destroy all children first unless we are told not to
@@ -125,8 +129,7 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
                 }
             }
 
-            // Finally we fire an event to delete this
-            Y.fire("mojito:client:delete", this);
+            // Once here there should be no referance left to the binder or mp
         },
 
         destroyChild: function (viewId, retainNode) {
@@ -160,7 +163,7 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
                     );
                 } else {
                     this.query = {};
-                } 
+                }
             }
 
             if (key) {
@@ -187,12 +190,6 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
 
         // start up any binders we have in the config
         this.attachBinders(config.binders);
-
-        // Listen for delete requests
-        Y.on("mojito:client:delete", function (obj) {
-            Y.log("Delete was called on object [" + obj + "]", "info");
-            delete obj;
-        });
 
         Y.log("Mojito client lite started.");
     }
@@ -223,14 +220,14 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
 
                 Y.use(binderName, function () {
 
-                    var binder = Y.mojito.binders[binderName],
+                    var Binder = Y.mojito.binders[binderName],
                         binderInstance,
                         mp;
 
-                    if (typeof binder === "object") {
-                        binderInstance = Object.create(binder);
-                    } else if (typeof binder === "function") {
-                        binderInstance = new binder();
+                    if (typeof Binder === "object") {
+                        binderInstance = Object.create(Binder);
+                    } else if (typeof Binder === "function") {
+                        binderInstance = new Binder();
                     } else {
                         Y.log("The binder module [" + binderName + "] could not be created.", "info");
                         return;
@@ -272,7 +269,7 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
 
             var self = this;
 
-            this.resourceStore.expandInstance(command.instance, command.context, function(err, instance) {
+            this.resourceStore.expandInstance(command.instance, command.context, function (err, instance) {
 
                 if (err) {
                     if (typeof cb === 'function') {
