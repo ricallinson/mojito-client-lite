@@ -46,15 +46,22 @@ YUI.add("mojito-client-lite", function(Y, NAME) {
                     var binder = Y.mojito.binders[binderName],
                         binderInstance;
 
-                    binderInstance = Object.create(Y.mojito.binders[binderName])
+                    if (typeof binder === "object") {
+                        binderInstance = Object.create(binder);
+                    } else if (typeof binder === "function") {
+                        binderInstance = new binder();
+                    } else {
+                        Y.log("The binder module [" + binderName + "] could not be created.", "info");
+                        return;
+                    }
 
                     if (!binderInstance) {
                         Y.log("Binder module [" + binderName + "] was not found.", "info");
                         return;
                     }
 
-                    if (typeof binderInstance.init === "function") {
-                        binderInstance.init({});
+                    if (typeof binderInstance.initializer === "function") {
+                        binderInstance.initializer({});
                     }
 
                     if (typeof binderInstance.bind === "function") {

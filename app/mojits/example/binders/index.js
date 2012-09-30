@@ -10,19 +10,30 @@
 
 YUI.add('example_binder_index', function (Y, NAME) {
 
-    Y.namespace('mojito.binders')[NAME] = {
+    Y.namespace('mojito.binders')[NAME] = Y.Base.create(NAME, Y.View, [], {
 
-        init: function (mp) {
+        events: {
+            div: {
+                click: "logit"
+            }
+        },
+
+        initializer: function (mp) {
             this.mp = mp;
         },
 
         bind: function (node) {
-            Y.log("Yo, the binder is working!");
+            this.set("container", node);
+        },
+
+        logit: function () {
+            Y.log("A click happened");
         }
-    };
+    });
 
 }, '0.0.1', {
 	requires: [
-		"mojito-client-lite"
+		"mojito-client-lite",
+        "view"
 	]
 });
