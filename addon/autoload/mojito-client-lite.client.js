@@ -224,7 +224,8 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
                 Y.use(binderName, function () {
 
                     var binder = Y.mojito.binders[binderName],
-                        binderInstance;
+                        binderInstance,
+                        mp;
 
                     if (typeof binder === "object") {
                         binderInstance = Object.create(binder);
@@ -240,16 +241,24 @@ YUI.add("mojito-client-lite", function (Y, NAME) {
                         return;
                     }
 
+                    // Attach the Mojit Proxy
+                    binderInstance.mp = new MojitProxy({
+                        type: binderInfo.type,
+                        viewId: viewId,
+                        instanceId: Y.guid(),
+                        binder: binderInstance,
+                        dispatch: function () {
+                            self.dispatchAdapter.apply(self, arguments);
+                        }
+                    });
+
+                    // HACK to see if our binderInstance is a Y.View
+                    if (typeof binderInstance._ATTR_E_FACADE === "object") {
+                        binderInstance.set("container", node);
+                    }
+
                     if (typeof binderInstance.initializer === "function") {
-                        binderInstance.initializer(new MojitProxy({
-                            type: binderInfo.type,
-                            viewId: viewId,
-                            instanceId: Y.guid(),
-                            binder: binderInstance,
-                            dispatch: function () {
-                                self.dispatchAdapter.apply(self, arguments);
-                            }
-                        }));
+                        binderInstance.initializer();
                     }
 
                     if (typeof binderInstance.bind === "function") {

@@ -18,14 +18,6 @@ YUI.add('example_binder_destroy', function (Y, NAME) {
             }
         },
 
-        initializer: function (mp) {
-            this.mp = mp;
-        },
-
-        bind: function (node) {
-            this.set("container", node);
-        },
-
         logit: function (e) {
             e.currentTarget.remove();
         }

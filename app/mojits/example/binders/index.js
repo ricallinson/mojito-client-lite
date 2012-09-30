@@ -18,14 +18,6 @@ YUI.add('example_binder_index', function (Y, NAME) {
             }
         },
 
-        initializer: function (mp) {
-            this.mp = mp;
-        },
-
-        bind: function (node) {
-            this.set("container", node);
-        },
-
         logit: function (e) {
             this.mp.invoke("index", function (err, data) {
                 e.currentTarget.append(data);
