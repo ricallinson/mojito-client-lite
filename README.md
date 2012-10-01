@@ -11,7 +11,7 @@ To run the example;
 	git clone git@github.com:ricallinson/mojito-client-lite.git
 	cd ./mojito-client-lite/app
 	npm i mojito -g
-	npm link ../mojit
+	npm link ../bundle
 	mojito start
 
 Open [http://localhost:8666/@example/index](http://localhost:8666/@example/index) in a browser.
