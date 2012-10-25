@@ -95,7 +95,8 @@ YUI.add("yahoo-mojito-addon-html", function (Y, NAME) {
 
         done: function (data, meta) {
 
-            var command = this.command,
+            var appConfig = this.ac.config.getAppConfig(),
+                command = this.command,
                 html,
                 assets = {},
                 ac = this.ac,
@@ -112,7 +113,7 @@ YUI.add("yahoo-mojito-addon-html", function (Y, NAME) {
                 ac._adapter = tmp;
 
                 // Get all the deploy assets
-                if (command.instance.appConfig.mojitoClientLite) {
+                if (appConfig.mojitoClientLite) {
                     ac.deploylite.addAssets(ac.assets, meta.binders);
                 } else {
                     ac.deploy.constructMojitoClientRuntime(ac.assets, meta.binders);
@@ -154,6 +155,7 @@ YUI.add("yahoo-mojito-addon-html", function (Y, NAME) {
         "mojito-deploy-addon",
         "mojito-deploylite-addon",
         "mojito-assets-addon",
-        "mojito-http-addon"
+        "mojito-http-addon",
+        "mojito-config-addon"
     ]
 });
